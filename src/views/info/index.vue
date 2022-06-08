@@ -73,6 +73,17 @@ export default {
           this.$router.push({ path: '/list/score', query: { ...obj }})
           break;
         }
+        case 8: {
+          let obj = {
+            id: item.id,
+            relevanceId: item.relevanceId,
+            type: item.type,
+            state: 0,
+            key: 1
+          }
+          this.$router.push({ path: '/rectification', query: { ...obj }})
+          break;
+        }
         default:
           break;
       }

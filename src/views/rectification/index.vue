@@ -7,6 +7,7 @@
 
 <script>
 import Api from '@/api/question/index'
+import infoApi from '@/api/info/index'
 export default {
   components: {
     QuestionForm: () => import('@/components/QuestionForm'),
@@ -37,7 +38,12 @@ export default {
       state: +queryVal.state,
       key: +queryVal.key
     }
-    this.fetchData()
+    if (queryVal.relevanceId) {
+      this.formList = this.handleComputedFormList(0)
+      this.getDetailInfo(queryVal)
+    } else {
+      this.fetchData()
+    }
   },
   methods: {
     async fetchData() {
@@ -63,102 +69,6 @@ export default {
       let result = []
       switch (state) {
         case 0:
-          result = [
-            {
-              type: 'input',
-              title: '问题名称：',
-              readonly: true,
-              value: 'problemName'
-            },
-            {
-              type: 'input',
-              title: '问题类型：',
-              readonly: true,
-              value: 'probelmType',
-              pickerOptions: [
-                {
-                  label: '设备设施',
-                  value: 0
-                },
-                {
-                  label: '电气路线',
-                  value: 1
-                },
-                {
-                  label: '消防安全',
-                  value: 2
-                },
-                {
-                  label: '职业健康',
-                  value: 3
-                },
-                {
-                  label: '生产车间现场',
-                  value: 4
-                },
-                {
-                  label: '危化品使用',
-                  value: 5
-                },
-                {
-                  label: '工业气体使用',
-                  value: 6
-                }
-              ]
-            },
-            {
-              type: 'date',
-              title: '发现时间：',
-              readonly: true,
-              value: 'discoverTime'
-            },
-            {
-              type: 'textarea',
-              title: '问题详情：',
-              readonly: true,
-              value: 'problemDetail'
-            },
-            {
-              type: 'uploadImg',
-              title: '问题图片：',
-              readonly: true,
-              value: 'attachment'
-            },
-            {
-              type: 'input',
-              title: '发现单位：',
-              readonly: true,
-              value: 'createUnitName'
-            },
-            {
-              type: 'input',
-              title: '整改单位：',
-              readonly: true,
-              value: 'rectifyUnitName'
-            },
-            {
-              type: 'text',
-              title: '问题整改'
-            },
-            {
-              type: 'input',
-              title: '整改措施：',
-              value: 'correctiveMeasures'
-            },
-            {
-              type: 'uploadImg',
-              title: '整改前图片：',
-              value: 'rectificationBeforePicture',
-              imgName: 'rectificationBeforePictureName'
-            },
-            {
-              type: 'uploadImg',
-              title: '整改后图片：',
-              value: 'rectificationAfterPicture',
-              imgName: 'rectificationAfterPictureName'
-            }
-          ]
-          break;
         case 1:
           result = [
             {
@@ -719,6 +629,22 @@ export default {
         this.$router.back()
       } else {
         this.$Toast.fail('保存失败')
+      }
+    },
+    // 从消息模块点击详情
+    async getDetailInfo(item) {
+      const params = {
+        id: item.id,
+        relevanceId: item.relevanceId,
+        type: item.type
+      }
+      const result = await infoApi.getDetail(params)
+      if (result.code === '200') {
+        this.formData = {
+          ...result.data
+        }
+      } else {
+        this.formData = {}
       }
     }
   }
