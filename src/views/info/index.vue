@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header" v-if="itemList.length > 0">
-      <div class="header_content" bindtap="handleClear">
+      <div class="header_content" @click="handleClear">
         <span>一键清除</span>
         <img class="clear_icon" src="@/assets/img/info/info_clear.png" />
       </div>
@@ -27,15 +27,52 @@ export default {
   },
   methods: {
     handleCardClick(item) {
-      switch (item.title) {
-        case '企业安全生产责任制星级评分':
-          // let obj = {
-          //   id: item.id,
-          //   relevanceId: item.relevanceId,
-          //   type: item.type
-          // }
+      // 0企业安全生产责任制日常检查项目表, 1工矿企业日常检查项目表, 2劳动密集型企业日常检查项目表, 3企业安全生产责任制, 4行政村、社区安全生产责任制, 5学校安全生产责任制, 6医疗机构安全生产责任制, 7生态环境“星级”评定, 8问题整改
+      const safetyRatingList = ['企业安全生产责任制星级评分', '行政村、社区安全生产责任制星级评分', '学校安全生产责任制星级评分', '医疗机构安全生产责任制星级评分']
+      switch (item.type) {
+        case 0:
+        case 1:
+        case 2: {
+          let obj = {
+            id: item.id,
+            relevanceId: item.relevanceId,
+            type: item.type,
+            correctionKey: item.type + 1
+          }
+          this.$router.push({ path: '/list/correction', query: { ...obj }})
           break;
-
+        }
+        case 3:
+        case 4:
+        case 5:
+        case 6: {
+          let obj = {
+            starKey: 'SAFETYRATING',
+            item: JSON.stringify({
+              id: item.id,
+              relevanceId: item.relevanceId,
+              type: item.type,
+              safetyType: safetyRatingList.findIndex(_ => _ === item.title),
+              startLevelState: item.startLevelState
+            })
+          }
+          this.$router.push({ path: '/list/score', query: { ...obj }})
+          break;
+        }
+        case 7: {
+          let obj = {
+            starKey: 'ECOLOGY',
+            item: JSON.stringify({
+              id: item.id,
+              relevanceId: item.relevanceId,
+              type: item.type,
+              safetyType: null,
+              startLevelState: item.startLevelState
+            })
+          }
+          this.$router.push({ path: '/list/score', query: { ...obj }})
+          break;
+        }
         default:
           break;
       }

@@ -12,6 +12,7 @@ import scoreminingApi from '@/api/star/scoremining' // 企业安全生产责任�
 import communitysafetyApi from '@/api/star/communitysafety' // 行政村、社区安全生产责任制“星
 import schoolsafetyApi from '@/api/star/schoolsafety' // 学校安全生产责任制“星级”评分
 import medicalsafetyApi from '@/api/star/medicalsafety' // 医疗机构
+import infoApi from '@/api/info/index'
 import {
   ECOLOGY_List,
   SCORE_MINING_LIST,
@@ -37,9 +38,14 @@ export default {
     if (item) {
       const info = JSON.parse(item)
       this.state = info.state
-      this.handleSetApi(starKey, info.type)
+      this.handleSetApi(starKey, info.safetyType)
       this.starKey = starKey
-      this.getData(info)
+      if (info.relevanceId) { // 从消息模块进入
+        this.getDetailInfo(info)
+        this.state = info.startLevelState
+      } else {
+        this.getData(info)
+      }
     }
   },
   methods: {
@@ -76,7 +82,7 @@ export default {
       const Api = this.starKey === 'ECOLOGY' ? environmentApi : safetyratingApi
       const params = {
         id: item.id,
-        type: item.type
+        type: item.safetyType
       }
       const result = await Api.getDetail(params)
       if (result.code === '200') {
@@ -116,6 +122,22 @@ export default {
           ...this.formData,
           ...totalObj
         }
+      }
+    },
+    // 从消息模块点击详情
+    async getDetailInfo(item) {
+      const params = {
+        id: item.id,
+        relevanceId: item.relevanceId,
+        type: item.type
+      }
+      const result = await infoApi.getDetail(params)
+      if (result.code === '200') {
+        this.formData = {
+          ...result.data
+        }
+      } else {
+        this.formData = {}
       }
     }
   }

@@ -18,6 +18,7 @@
 import safetyApi from '@/api/correction/safety' // 企业安全生产责任制
 import miningApi from '@/api/correction/mining' // 工矿企业
 import labourApi from '@/api/correction/labour' // 劳动密集型企业
+import infoApi from '@/api/info/index' // 消息模块
 import {
   SAFETY_LIST,
   MINING_LIST,
@@ -37,8 +38,13 @@ export default {
     }
   },
   mounted() {
-    this.handleFormList(this.$route.query)
-    this.getData(this.$route.query)
+    const item = this.$route.query
+    this.handleFormList(item)
+    if (item.relevanceId) {
+      this.getDetailInfo(item)
+    } else {
+      this.getData(item)
+    }
   },
   methods: {
     handleFormList(item) {
@@ -81,6 +87,22 @@ export default {
         this.$router.back()
       } else {
         this.$Toast.fail('保存失败')
+      }
+    },
+    // 从消息模块点击详情
+    async getDetailInfo(item) {
+      const params = {
+        id: item.id,
+        relevanceId: item.relevanceId,
+        type: item.type
+      }
+      const result = await infoApi.getDetail(params)
+      if (result.code === '200') {
+        this.formData = {
+          ...result.data
+        }
+      } else {
+        this.formData = {}
       }
     }
   }

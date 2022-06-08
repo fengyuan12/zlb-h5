@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import environmentApi from '@/api/star/environment'
-import safetyratingApi from '@/api/star/safetyrating'
+import environmentApi from '@/api/star/environment' // 生态环境“星级”评定
+import safetyratingApi from '@/api/star/safetyrating' // 安全生产“星级”评分
 import safetyApi from '@/api/correction/safety' // 企业安全生产责任制
 import miningApi from '@/api/correction/mining' // 工矿企业
 import labourApi from '@/api/correction/labour' // 劳动密集型企业
@@ -77,7 +77,7 @@ export default {
     return {
       type: 'CORRECTION', // CORRECTION: 企业自查自纠； STAR: 星级评定
       correctionKey: null, // 1: 企业安全生产责任制日常检查项目表；2：工矿企业日常检查项目表；3：劳动密集型企业日常检查项目表
-      starKey: null,
+      starKey: null, // ECOLOGY: 生态环境“星级”评定 SAFETYRATING：安全生产“星级”评定
       listData: [],
       searchVal: ''
     }
@@ -119,6 +119,7 @@ export default {
         this.listData = []
       }
     },
+    // set 星级评定 API
     handleSetStarApi() {
       const { starKey } = this
       switch (starKey) {
@@ -132,6 +133,7 @@ export default {
           break;
       }
     },
+    // set 企业自查自纠三张表 API
     handleSetCorrApi() {
       let Api = ''
       switch (this.correctionKey) {
@@ -149,6 +151,7 @@ export default {
       }
       this.Api = Api
     },
+    // 点击卡片跳转
     handleCardClick(item) {
       const { type, correctionKey, starKey } = this
       if (type === 'CORRECTION') {
@@ -163,7 +166,7 @@ export default {
           starKey,
           item: JSON.stringify({
             id: item.id,
-            type: item.type,
+            safetyType: item.type,
             state: item.state
           })
         }
