@@ -13,6 +13,9 @@ const baseRoutes = [
       {
         path: '/info',
         name: 'info',
+        meta: {
+          keepAlive: true
+        },
         component: resolve => require(['@/views/info/index'], resolve)
       },
       {

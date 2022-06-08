@@ -1,7 +1,10 @@
 <template>
   <div>
     <div :class="{'layout_body': showNavBar}">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
     </div>
     <NavBar :info-status="infoStatus" v-if="showNavBar" />
   </div>

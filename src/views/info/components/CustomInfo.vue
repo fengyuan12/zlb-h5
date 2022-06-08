@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  name: 'CustomInfo',
   props: {
     itemInfo: {
       type: Object,

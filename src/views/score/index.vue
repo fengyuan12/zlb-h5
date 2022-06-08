@@ -48,6 +48,14 @@ export default {
       }
     }
   },
+  beforeRouteLeave(to, from, next) {
+    if (to.path === '/info') {
+      to.meta.keepAlive = true
+    } else {
+      to.meta.keepAlive = false
+    }
+    next()
+  },
   methods: {
     handleSetApi(key, safetyType) {
       let Api = ''

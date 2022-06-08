@@ -25,6 +25,10 @@ export default {
   mounted() {
     this.fetchData()
   },
+  beforeRouteLeave(to, from, next) {
+    from.meta.keepAlive = false
+    next()
+  },
   methods: {
     handleCardClick(item) {
       // 0企业安全生产责任制日常检查项目表, 1工矿企业日常检查项目表, 2劳动密集型企业日常检查项目表, 3企业安全生产责任制, 4行政村、社区安全生产责任制, 5学校安全生产责任制, 6医疗机构安全生产责任制, 7生态环境“星级”评定, 8问题整改
