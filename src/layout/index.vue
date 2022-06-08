@@ -3,11 +3,12 @@
     <div :class="{'layout_body': showNavBar}">
       <router-view></router-view>
     </div>
-    <NavBar v-if="showNavBar" />
+    <NavBar :info-status="infoStatus" v-if="showNavBar" />
   </div>
 </template>
 
 <script>
+import infoApi from '@/api/info/index'
 export default {
   components: {
     NavBar: () => import('./components/NavBar')
@@ -19,17 +20,30 @@ export default {
   },
   data() {
     return {
-      nowRouteName: 'index'
+      nowRouteName: 'index',
+      infoStatus: false
     }
   },
   watch: {
     '$route'(newVal) {
       this.nowRouteName = newVal.name
+      this.handleInfoStatus()
     }
   },
   mounted() {
     const { name } = this.$route
     this.nowRouteName = name
+    this.handleInfoStatus()
+  },
+  methods: {
+    async handleInfoStatus() {
+      this.infoStatus = false
+      // 设置消息是否未读
+      const result = await infoApi.getUnreadMessage()
+      if (result.code === '200') {
+        this.infoStatus = result.data
+      }
+    }
   }
 }
 </script>

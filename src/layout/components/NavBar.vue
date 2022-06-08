@@ -1,8 +1,10 @@
 <template>
   <div class="footer_navbar">
     <ul flex="main:around">
-      <li flex="dir:top" v-for="item of list" :key="item.key" @click="handleUpdateKey(item)">
-        <img :src="item.key === nowKey ? item.iconFocus : item.icon">
+      <li flex="dir:top" style="position: relative" v-for="item of list" :key="item.key" @click="handleUpdateKey(item)">
+        <div :class="{'red_status': item.key === 'info' && infoStatus}">
+          <img :src="item.key === nowKey ? item.iconFocus : item.icon">
+        </div>
         <span :class="{'focus_text': item.key === nowKey}">{{item.title}}</span>
       </li>
     </ul>
@@ -17,6 +19,12 @@ const InfoIconFocus = require('@/assets/img/navbar/info_focus.png')
 const myIcon = require('@/assets/img/navbar/mine.png')
 const myIconFocus = require('@/assets/img/navbar/mine_focus.png')
 export default {
+  props: {
+    infoStatus: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       list: [
@@ -80,6 +88,19 @@ export default {
 
 .focus_text {
   color: #2784FF;
+}
+
+.red_status {
+  &::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+    background: red;
+    position: absolute;
+  }
 }
 </style>
 
