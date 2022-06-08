@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div :class="[1 ? 'container' : 'normal']">
     <img src="@/assets/img/index/index_title.png" class="header_title">
     <CustomTitle title="“星级”评定" v-if="statClassList.length > 0" />
     <div class="star-class">
@@ -114,101 +114,104 @@ export default {
   height: 100%;
   padding: 0 16px;
   box-sizing: border-box;
-}
 
-.header_title {
-  margin-top: 16px;
-  height: 138px;
-  width: 100%;
-}
+  .header_title {
+    margin-top: 16px;
+    height: 138px;
+    width: 100%;
+  }
 
-/* 星级评定 */
-.star-class {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  /* 星级评定 */
+  .star-class {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-.star-class-container {
-  position: relative;
-  width: 48%;
-}
+  .star-class-container {
+    position: relative;
+    width: 48%;
+  }
 
-.star-class-icon {
-  position: absolute;
-  height: 32px;
-  width: 35px;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 10px;
-  z-index: 2;
-  img {
-    height: 100%;
+  .star-class-icon {
+    position: absolute;
+    height: 32px;
+    width: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    z-index: 2;
+    img {
+      height: 100%;
+    }
+  }
+
+  .star-class-text {
+    width: 103px;
+    font-size: 11px;
+    position: absolute;
+    font-weight: 500;
+    color: #FFFFFF;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0px;
+    z-index: 2;
+  }
+
+  .star-class-bg-img {
+    width: 100%;
+    height: 64px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 企业全面自查自纠 */
+  .business-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* 问题发现 */
+  .question {
+    padding-top: 20px;
+    position: relative;
+  }
+  .question_bg {
+    height: 54px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .question_icon {
+    left: 12px;
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    z-index: 2;
+    top: 30px;
+  }
+
+  .question_text {
+    position: absolute;
+    left: 58px;
+    line-height: 54px;
+    font-weight: 500;
+    color: #FFFFFF;
+    z-index: 2;
+  }
+
+  .question_left {
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    top: 38px;
   }
 }
 
-.star-class-text {
-  width: 103px;
-  font-size: 11px;
-  position: absolute;
-  font-weight: 500;
-  color: #FFFFFF;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0px;
-  z-index: 2;
+.normal {
+  background: red;
 }
-
-.star-class-bg-img {
-  width: 100%;
-  height: 64px;
-  position: relative;
-  z-index: 1;
-}
-
-/* 企业全面自查自纠 */
-.business-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-/* 问题发现 */
-.question {
-  padding-top: 20px;
-  position: relative;
-}
-.question_bg {
-  height: 54px;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-.question_icon {
-  left: 12px;
-  position: absolute;
-  height: 32px;
-  width: 32px;
-  z-index: 2;
-  top: 30px;
-}
-
-.question_text {
-  position: absolute;
-  left: 58px;
-  line-height: 54px;
-  font-weight: 500;
-  color: #FFFFFF;
-  z-index: 2;
-}
-
-.question_left {
-  position: absolute;
-  z-index: 2;
-  right: 10px;
-  width: 16px;
-  height: 16px;
-  top: 38px;
-}
-
 </style>

@@ -83,24 +83,34 @@ export default {
     }
   },
   mounted() {
-    const { type, starKey, correctionKey } = this.$route.query
-    this.type = type
-    this.starKey = starKey
-    this.correctionKey = +correctionKey
-    switch (type) {
-      case 'CORRECTION':
-        this.handleSetCorrApi() // 设置三张表的Api
-        break;
-      case 'STAR':
-      case 'SAFETYRATING':
-        this.handleSetStarApi() // 设置星级评定的Api
-        break
-      default:
-        break;
-    }
-    this.getData()
+    this.init()
+  },
+  activated() {
+    this.init()
+  },
+  beforeRouteLeave(to, from, next) {
+    from.meta.keepAlive = true
+    next()
   },
   methods: {
+    init() {
+      const { type, starKey, correctionKey } = this.$route.query
+      this.type = type
+      this.starKey = starKey
+      this.correctionKey = +correctionKey
+      switch (type) {
+        case 'CORRECTION':
+          this.handleSetCorrApi() // 设置三张表的Api
+          break;
+        case 'STAR':
+        case 'SAFETYRATING':
+          this.handleSetStarApi() // 设置星级评定的Api
+          break
+        default:
+          break;
+      }
+      this.getData()
+    },
     handleInputSearch() {
       this.timer && clearTimeout(this.timer)
       this.timer = setTimeout(() => {

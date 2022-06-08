@@ -24,13 +24,17 @@ export default {
   data() {
     return {
       nowRouteName: 'index',
-      infoStatus: false
+      infoStatus: false,
+      timer: null
     }
   },
   watch: {
     '$route'(newVal) {
       this.nowRouteName = newVal.name
-      this.handleInfoStatus()
+      this.timer && clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.handleInfoStatus()
+      }, 10000)
     }
   },
   mounted() {

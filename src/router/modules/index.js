@@ -26,6 +26,9 @@ const baseRoutes = [
       {
         path: '/list',
         name: 'list',
+        meta: {
+          keepAlive: true
+        },
         component: resolve => require(['@/views/list/index'], resolve)
       },
       {
