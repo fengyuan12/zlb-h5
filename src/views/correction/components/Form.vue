@@ -3,8 +3,11 @@
     <div class="card">
       <span>{{formItem.key}}.{{formItem.content}}</span>
       <div class="divider"></div>
-      <textarea class="card_textarea" style="margin-top: 0" placeholder="检查情况：" v-model="formData[formItem.situation]" />
-      <textarea class="card_textarea" placeholder="备注：" v-model="formData[formItem.remark]" />
+      <!-- <textarea class="card_textarea" style="margin-top: 0" placeholder="检查情况：" v-model="formData[formItem.situation]" /> -->
+      <van-radio-group v-model="formData[formItem.situation]">
+        <van-radio style="margin-bottom: 4px" v-for="item of radioList" :key="item.value" :name="item.value">{{item.label}}</van-radio>
+      </van-radio-group>
+      <textarea class="card_textarea" placeholder="问题描述：" v-model="formData[formItem.remark]" />
     </div>
   </div>
 </template>
@@ -23,6 +26,15 @@ export default {
       default: () => {
         return {}
       }
+    }
+  },
+  data() {
+    return {
+      radioList: [
+        { label: '是', value: '是' },
+        { label: '否', value: '否' },
+        { label: '无', value: '无' }
+      ]
     }
   }
 }
