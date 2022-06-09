@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       type: 'CORRECTION', // CORRECTION: 企业自查自纠； STAR: 星级评定
-      correctionKey: null, // 1: 企业安全生产责任制日常检查项目表；2：工矿企业日常检查项目表；3：劳动密集型企业日常检查项目表
+      correctionKey: null, // 1: 企业安全生产责任制检查项目表；2：工矿企业检查项目表；3：劳动密集型企业检查项目表
       starKey: null, // ECOLOGY: 生态环境“星级”评定 SAFETYRATING：安全生产“星级”评定
       listData: [],
       searchVal: ''

@@ -1,7 +1,7 @@
 export const TOKEN = 'INSPECTION_ZLBH5'
 
 
-// 企业安全生产责任制日常检查表
+// 企业安全生产责任制检查表
 export const SAFETY_LIST = [
   {
     key: 1,
@@ -47,7 +47,7 @@ export const SAFETY_LIST = [
   }
 ]
 
-// 工矿企业日常检查项目表
+// 工矿企业检查项目表
 export const MINING_LIST = [
   {
     key: 1,
@@ -111,7 +111,7 @@ export const MINING_LIST = [
   }
 ]
 
-// 劳动密集型企业日常检查项目表
+// 劳动密集型企业检查项目表
 export const LABOUR_LIST = [
   {
     key: 1,

@@ -22,7 +22,7 @@ const handleError = (res) => {
 // http request 拦截器
 _axios.interceptors.request.use(
   config => {
-    config.headers.Authriozation = '22ce385110a24c5c9cd686e3f7214a82'
+    config.headers.Authriozation = '707dc9d9d1b643f8b2f60a1b3e89c3fd'
     config.headers.userId = 22
     return config
   },

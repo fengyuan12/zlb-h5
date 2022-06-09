@@ -54,19 +54,19 @@ export default {
       businessTableList: [
         {
           key: 1,
-          title: '企业安全生产责任制日常检查项目表',
+          title: '企业安全生产责任制检查项目表',
           src: business_icon1,
           code: 'SELF_CORRECTION_SAFETY'
         },
         {
           key: 2,
-          title: '工矿企业日常检查项目表',
+          title: '工矿企业检查项目表',
           src: business_icon2,
           code: 'SELF_CORRECTION_MINING'
         },
         {
           key: 3,
-          title: '劳动密集型企业日常检查项目表',
+          title: '劳动密集型企业检查项目表',
           src: business_icon3,
           code: 'SELF_CORRECTION_LABOUR'
         }
