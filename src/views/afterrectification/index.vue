@@ -70,8 +70,8 @@ export default {
 }
 
 .header_content {
-  background: #F7F8FA;
-  border-radius: 6px;
+  background: #F6F7FB;
+  border-radius: 20px;
   border: 1px solid #F2F3F5;
   height: 40px;
   display: flex;
@@ -93,8 +93,8 @@ export default {
 }
 
 .body {
-  background: #F6F7FB;
-  padding: 8px 18px;
+  // background: #F6F7FB;
+  padding: 8px 0px;
   box-sizing: border-box;
   min-height: calc(100vh - 62px);
 }

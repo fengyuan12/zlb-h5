@@ -17,18 +17,20 @@ export default {
 
 <style lang="scss" scoped>
 .custom_sumbit {
-  margin: 10px 0;
+  margin: 20px 0;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 16px;
+  // padding: 0 16px;
 }
 
 .custom_sumbit_button {
   background: #2784FF;
   color: white;
-  height: 32px;
+  height: 48px;
   border: none;
+  font-weight: 500;
   width: 100%;
-  border-radius: 20px;
+  font-size: 18px;
+  border-radius: 24px;
 }
 </style>

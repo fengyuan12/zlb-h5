@@ -7,8 +7,10 @@
       <van-radio-group v-model="formData[formItem.situation]">
         <van-radio style="margin-bottom: 4px" v-for="item of radioList" :key="item.value" :name="item.value">{{item.label}}</van-radio>
       </van-radio-group>
+      <div class="divider"></div>
       <textarea class="card_textarea" placeholder="问题描述：" v-model="formData[formItem.remark]" />
     </div>
+    <div class="card_divider"></div>
   </div>
 </template>
 
@@ -43,7 +45,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  padding: 8px 16px;
+  // padding: 8px 16px;
   box-sizing: border-box;
   background: #F6F7FB;
 }
@@ -51,14 +53,14 @@ export default {
 .card {
   box-sizing: border-box;
   width: 100%;
-  padding: 12px;
+  padding: 16px;
   background: #ffffff;
   border-radius: 6px;
 }
 
 .divider {
-  background: #F6F6F8;
-  margin: 12px 0;
+  background: #E8E9EC;
+  margin: 16px 0;
   width: 100%;
   height: 1px;
 }
@@ -67,11 +69,18 @@ export default {
   box-sizing: border-box;
   width: 100%;
   height: 80px;
-  background: #F6F7FB;
+  // background: #F6F7FB;
   line-height: 1.5;
   border: none;
   padding: 4px;
-  margin-top: 12px;
   resize: none;
+  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color : #B3B5B9;
+  }
+}
+
+.card_divider {
+  height: 8px;
+  background: #F6F7FB;
 }
 </style>

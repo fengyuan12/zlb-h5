@@ -81,8 +81,8 @@ export default {
   padding: 4px;
   box-sizing: border-box;
   img {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
   }
 }
 

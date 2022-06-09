@@ -17,41 +17,41 @@ export default {
       formList: [
         {
           type: 'input',
-          title: '问题名称：',
+          title: '问题名称',
           value: 'clueName'
         },
         {
           type: 'picker',
-          title: '问题类型：',
+          title: '问题类型',
           value: 'questionType',
           pickerOptions: ['设备设施', '电气路线', '消防安全', '职业健康', '生产车间现场', '危化品使用', '工业气体使用']
         },
         {
           type: 'date',
-          title: '发现时间：',
+          title: '发现时间',
           value: 'createTime'
         },
         {
           type: 'textarea',
-          title: '问题详情：',
+          title: '问题详情',
           value: 'clueDetail'
         },
         {
           type: 'uploadImg',
-          title: '问题图片：',
+          title: '问题图片',
           value: 'cluePicture',
           imgName: 'cluePictureName'
         },
         {
           type: 'input',
-          title: '发现人：',
+          title: '发现人',
           readonly: true,
           value: 'createUnitName'
         },
         {
           type: 'picker',
           key: 'question_unit',
-          title: '问题单位：',
+          title: '问题单位',
           value: 'rectifyIndex',
           pickerOptions: []
         }
@@ -138,7 +138,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 100vh;
-  background: #F6F7FB;
+  // background: #F6F7FB;
   box-sizing: border-box;
   padding: 8px 16px;
 }

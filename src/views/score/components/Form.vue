@@ -123,11 +123,17 @@ export default {
 }
 
 .form_item_input {
-  background: #F6F7FB;
+  // background: #F6F7FB;
   padding: 0 8px;
   height: 36px;
   border: none;
   outline: none;
   width: 100%;
+  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color : #B3B5B9;
+  }
+  &:disabled {
+    background: #fff;
+  }
 }
 </style>

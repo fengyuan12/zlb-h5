@@ -16,7 +16,6 @@
             <img v-if="item.checkState === 0" class="card_title_icon" src="@/assets/img/list/pending.png" />
             <img v-else class="card_title_icon" src="@/assets/img/list/done.png" />
           </div>
-          <div class="divider"></div>
           <div class="card_item">
             <img class="card_item_icon" src="@/assets/img/question/time.png" />
             <span class="card_item_title">检查月份</span>
@@ -27,6 +26,7 @@
             <span class="card_item_title">检查人&emsp;</span>
             <span class="card_item_content">{{item.checkPeople || ''}}</span>
           </div>
+          <div class="divider"></div>
         </div>
       </div>
       <div v-else-if="type === 'STAR' && listData.length > 0">
@@ -46,7 +46,6 @@
             <span v-if="item.state === 2">已考评</span>
             <span v-if="item.state === 3">已公布</span>
           </div>
-          <div class="divider"></div>
           <div class="card_item">
             <img class="card_item_icon" src="@/assets/img/list/date.png" />
             <span class="card_item_title">批次</span>
@@ -57,6 +56,7 @@
             <span class="card_item_title">单位</span>
             <span class="card_item_content">{{item.unitName || ''}}</span>
           </div>
+          <div class="divider"></div>
         </div>
       </div>
       <div v-else>
@@ -193,8 +193,8 @@ export default {
 }
 
 .header_content {
-  background: #F7F8FA;
-  border-radius: 6px;
+  background: #F6F7FB;
+  border-radius: 20px;
   border: 1px solid #F2F3F5;
   height: 40px;
   display: flex;
@@ -217,15 +217,15 @@ export default {
 
 .container {
   min-height: calc(100vh - 62px);
-  background: #F6F7FB;
+  // background: #F6F7FB;
   box-sizing: border-box;
-  padding: 18px;
+  padding: 16px;
 }
 
 .card {
   background: #FFFFFF;
   border-radius: 6px;
-  padding: 12px;
+  // padding: 12px;
   margin-bottom: 8px;
 }
 
@@ -233,6 +233,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .card_title_icon {

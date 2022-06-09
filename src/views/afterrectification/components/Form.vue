@@ -9,7 +9,6 @@
         <span>{{itemInfo.stateText}}</span>
       </div>
     </div>
-    <div class="divider"></div>
     <div class="card_item" v-for="item of cardList" :key="item.key">
       <img v-if="item.key === 1" class="card_item_icon" src="@/assets/img/question/type.png" />
       <img v-if="item.key === 2" class="card_item_icon" src="@/assets/img/question/unit.png" />
@@ -17,6 +16,7 @@
       <span class="card_item_title">{{item.title}}</span>
       <span class="card_item_content">{{itemInfo[item.value] || ''}}</span>
     </div>
+    <div class="divider"></div>
   </div>
 </template>
 
@@ -58,13 +58,14 @@ export default {
 .card {
   background: #FFFFFF;
   border-radius: 6px;
-  padding: 12px;
+  padding: 16px;
   margin-bottom: 8px;
 }
 
 .card_title {
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
 }
 
 .card_title_icon {
@@ -78,8 +79,8 @@ export default {
 .divider {
   width: 100%;
   height: 1px;
-  background: #F6F7FB;
-  margin: 12px 0;
+  background: #E8E9EC;
+  margin: 16px 0;
 }
 
 .card_item {

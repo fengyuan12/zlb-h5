@@ -10,7 +10,10 @@
         <textarea placeholder="存在其他问题：" class="card_textarea" v-model="formData.existProblem" />
       </div>
     </div>
-    <CustomButton v-if="formData.checkMonth === nowDate" @handleSumbit="handleSumbit" />
+    <div class="card_divider"></div>
+    <div style="padding: 0 16px">
+      <CustomButton v-if="formData.checkMonth === nowDate" @handleSumbit="handleSumbit" />
+    </div>
   </div>
 </template>
 
@@ -121,7 +124,7 @@ export default {
 .question_bg {
   box-sizing: border-box;
   background: #f6f7fb;
-  padding: 8px 16px;
+  // padding: 0 16px 8px;
   width: 100%;
 }
 
@@ -134,7 +137,7 @@ export default {
 }
 
 .qustion_divider {
-  background: #f6f6f8;
+  background: #E8E9EC;
   margin: 16px 0;
   width: 100%;
   height: 1px;
@@ -144,11 +147,19 @@ export default {
   box-sizing: border-box;
   height: 80px;
   width: 100%;
-  background: #f6f7fb;
+  // background: #f6f7fb;
   outline: none;
   border: none;
   padding: 5px;
   resize: none;
   line-height: 1.5;
+  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color : #B3B5B9;
+  }
+}
+
+.card_divider {
+  height: 8px;
+  background: #F6F7FB;
 }
 </style>

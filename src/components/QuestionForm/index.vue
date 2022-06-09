@@ -7,9 +7,10 @@
           <span>{{itemInfo.title}}</span>
         </div>
         <div style="flex: 1;">
-          <input class="question_form_item_input" :disabled="itemInfo.readonly" v-model="formData[itemInfo.value]" />
+          <input class="question_form_item_input" :disabled="itemInfo.readonly" v-model="formData[itemInfo.value]" :placeholder="`请输入${itemInfo.title}`" />
         </div>
       </div>
+      <div class="question_divider"></div>
     </div>
     <div v-if="itemInfo.type === 'picker'">
       <!-- 选择框 -->
@@ -18,9 +19,10 @@
           <span>{{itemInfo.title}}</span>
         </div>
         <div style="flex: 1;" @click="handlePicker">
-          <input class="question_form_item_input" readonly :value="itemInfo.pickerOptions[formData[itemInfo.value]]" />
+          <input class="question_form_item_input" readonly :value="itemInfo.pickerOptions[formData[itemInfo.value]]" :placeholder="`请选择${itemInfo.title}`" />
         </div>
       </div>
+      <div class="question_divider"></div>
     </div>
     <div v-if="itemInfo.type === 'date'">
       <!-- 日期选择框 -->
@@ -29,9 +31,10 @@
           <span>{{itemInfo.title}}</span>
         </div>
         <div style="flex: 1;" @click="handlePicker">
-          <input class="question_form_item_input" readonly :value="formData[itemInfo.value]" />
+          <input class="question_form_item_input" readonly :value="formData[itemInfo.value]" :placeholder="`请选择${itemInfo.title}`" />
         </div>
       </div>
+      <div class="question_divider"></div>
     </div>
     <div v-if="itemInfo.type === 'textarea'">
       <!-- 多文本 -->
@@ -39,9 +42,9 @@
         <div class="question_form_textarea_label">
           <span>{{itemInfo.title}}</span>
         </div>
-        <div class="question_divider"></div>
-        <textarea :disabled="itemInfo.readonly" v-model="formData[itemInfo.value]" placeholder="请输入..." />
+        <textarea :disabled="itemInfo.readonly" v-model="formData[itemInfo.value]" :placeholder="`请输入${itemInfo.title}`" />
       </div>
+      <div class="question_divider"></div>
     </div>
     <div v-if="itemInfo.type === 'uploadImg'">
       <!-- 上传图片 -->
@@ -49,14 +52,19 @@
         <div class="question_form_textarea_label">
           <span>{{itemInfo.title}}</span>
         </div>
-        <div class="question_divider"></div>
         <div class="question_upload_box">
           <div v-if="formData[itemInfo.value] && formData[itemInfo.value].length > 0">
             <img v-for="(item, index) of formData[itemInfo.value]" :key="index" class="question_upload_box_img" :src="item" />
           </div>
-          <img v-if="!itemInfo.readonly" @click="handleUpload" class="question_upload_box_img" src="@/assets/img/question/upload.png" />
+          <!-- <img v-if="!itemInfo.readonly" @click="handleUpload" class="question_upload_box_img" src="@/assets/img/question/upload.png" /> -->
+          <div v-if="!itemInfo.readonly" @click="handleUpload" class="question_upload_box_custom" flex="main:center">
+            <div class="custom_content" flex="main:center">
+              <div class="content_plus"></div>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="question_divider"></div>
     </div>
     <div v-if="itemInfo.type === 'text'">
       <div class="question_form_text">
@@ -73,6 +81,7 @@
           <img v-for="(item, index) of formData[itemInfo.value]" :key="index" class="question_star_icon" src="@/assets/img/mine/star_icon.png" />
         </div>
       </div>
+      <div class="question_divider"></div>
     </div>
     <!-- 下拉弹框 -->
     <van-popup v-model="showPicker" round position="bottom" get-container="body">
@@ -177,9 +186,7 @@ export default {
   display: flex;
   align-items: center;
   border-radius: 6px;
-  padding: 0 12px;
   line-height: 44px;
-  margin-bottom: 10px;
 }
 
 .question_form_item_label {
@@ -194,6 +201,9 @@ export default {
   line-height: 44px;
   border: none;
   outline: none;
+  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color : #B3B5B9;
+  }
 }
 
 .question_form_textarea {
@@ -202,8 +212,6 @@ export default {
   display: flex;
   flex-direction: column;
   border-radius: 6px;
-  padding: 0 12px;
-  margin-bottom: 10px;
   textarea {
     border: none;
     outline: none;
@@ -211,6 +219,12 @@ export default {
     height: 80px;
     line-height: 1.5;
     padding-bottom: 8px;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color : #B3B5B9;
+    }
+    &:disabled {
+      background: #fff;
+    }
   }
 }
 
@@ -221,8 +235,8 @@ export default {
 
 .question_divider {
   height: 1px;
-  background: #F6F7FB;
-  margin-bottom: 18px;
+  background: #E8E9EC;
+  margin: 4px 0;
 }
 
 .question_upload_box {
@@ -233,8 +247,48 @@ export default {
 
 .question_upload_box_img {
   margin: 0 8px 8px 0;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
+}
+
+.question_upload_box_custom {
+  margin: 0 8px 8px 0;
+  width: 100px;
+  height: 100px;
+  background: #EBF3FE;
+  border-radius: 8px;
+  align-items: center;
+  .custom_content {
+    width: 36px;
+    height: 36px;
+    background: #428FFC;
+    border-radius: 50%;
+    align-items: center;
+    .content_plus {
+      width: 18px;
+      height: 18px;
+      position: relative;
+      box-sizing: border-box;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        background-color: #fff;
+      }
+    }
+  }
 }
 
 .question_form_text {

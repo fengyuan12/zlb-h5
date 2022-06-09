@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <Form v-for="(item, index) of formList" :disabled="state >= 2" :key="index" :item-info="item" :form-data="formData" @handleKeyInput="handleKeyInput" />
-    <CustomButton v-if="state < 2" @handleSumbit="handleSumbit" />
+    <div style="padding: 0 16px">
+      <CustomButton v-if="state < 2" @handleSumbit="handleSumbit" />
+    </div>
   </div>
 </template>
 
@@ -154,8 +156,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: #f6f7fb;
+  background: #F6F7FB;;
   box-sizing: border-box;
-  padding: 8px 16px;
 }
 </style>

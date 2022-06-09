@@ -14,6 +14,7 @@
       <div class="info_body">
         <span>{{itemInfo.content}}</span>
       </div>
+      <div class="info_divider"></div>
     </div>
   </div>
 </template>
@@ -43,7 +44,6 @@ export default {
 
 .info-content {
   width: 100%;
-  padding: 12px;
   box-sizing: border-box;
 }
 
@@ -88,7 +88,7 @@ export default {
   font-size: 12px;
   font-weight: 400;
   color: #999999;
-  width: 128px;
+  width: 134px;
   text-align: right;
 }
 
@@ -98,5 +98,11 @@ export default {
   font-size: 14px;
   font-weight: 400;
   color: #666666;
+}
+
+.info_divider {
+  height: 1px;
+  background: #E8E9EC;
+  margin: 12px 0;
 }
 </style>

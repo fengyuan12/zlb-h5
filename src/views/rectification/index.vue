@@ -73,13 +73,13 @@ export default {
           result = [
             {
               type: 'input',
-              title: '问题名称：',
+              title: '问题名称',
               readonly: true,
               value: 'problemName'
             },
             {
               type: 'input',
-              title: '问题类型：',
+              title: '问题类型',
               readonly: true,
               value: 'probelmType',
               pickerOptions: [
@@ -115,31 +115,31 @@ export default {
             },
             {
               type: 'date',
-              title: '发现时间：',
+              title: '发现时间',
               readonly: true,
               value: 'discoverTime'
             },
             {
               type: 'textarea',
-              title: '问题详情：',
+              title: '问题详情',
               readonly: true,
               value: 'problemDetail'
             },
             {
               type: 'uploadImg',
-              title: '问题图片：',
+              title: '问题图片',
               readonly: true,
               value: 'attachment'
             },
             {
               type: 'input',
-              title: '发现单位：',
+              title: '发现单位',
               readonly: true,
               value: 'createUnitName'
             },
             {
               type: 'input',
-              title: '整改单位：',
+              title: '整改单位',
               readonly: true,
               value: 'rectifyUnitName'
             },
@@ -149,18 +149,18 @@ export default {
             },
             {
               type: 'input',
-              title: '整改措施：',
+              title: '整改措施',
               value: 'correctiveMeasures'
             },
             {
               type: 'uploadImg',
-              title: '整改前图片：',
+              title: '整改前图片',
               value: 'rectificationBeforePicture',
               imgName: 'rectificationBeforePictureName'
             },
             {
               type: 'uploadImg',
-              title: '整改后图片：',
+              title: '整改后图片',
               value: 'rectificationAfterPicture',
               imgName: 'rectificationAfterPictureName'
             }
@@ -170,13 +170,13 @@ export default {
           result = [
             {
               type: 'input',
-              title: '问题名称：',
+              title: '问题名称',
               readonly: true,
               value: 'problemName'
             },
             {
               type: 'input',
-              title: '问题类型：',
+              title: '问题类型',
               readonly: true,
               value: 'probelmType',
               pickerOptions: [
@@ -212,31 +212,31 @@ export default {
             },
             {
               type: 'date',
-              title: '发现时间：',
+              title: '发现时间',
               readonly: true,
               value: 'discoverTime'
             },
             {
               type: 'textarea',
-              title: '问题详情：',
+              title: '问题详情',
               readonly: true,
               value: 'problemDetail'
             },
             {
               type: 'uploadImg',
-              title: '问题图片：',
+              title: '问题图片',
               readonly: true,
               value: 'attachment'
             },
             {
               type: 'input',
-              title: '发现单位：',
+              title: '发现单位',
               readonly: true,
               value: 'createUnitName'
             },
             {
               type: 'input',
-              title: '整改单位：',
+              title: '整改单位',
               readonly: true,
               value: 'rectifyUnitName'
             },
@@ -246,20 +246,20 @@ export default {
             },
             {
               type: 'input',
-              title: '整改措施：',
+              title: '整改措施',
               readonly: true,
               value: 'correctiveMeasures'
             },
             {
               type: 'uploadImg',
-              title: '整改前图片：',
+              title: '整改前图片',
               readonly: true,
               value: 'rectificationBeforePicture',
               imgName: 'rectificationBeforePictureName'
             },
             {
               type: 'uploadImg',
-              title: '整改后图片：',
+              title: '整改后图片',
               readonly: true,
               value: 'rectificationAfterPicture',
               imgName: 'rectificationAfterPictureName'
@@ -270,13 +270,13 @@ export default {
           result = [
             {
               type: 'input',
-              title: '问题名称：',
+              title: '问题名称',
               readonly: true,
               value: 'problemName'
             },
             {
               type: 'input',
-              title: '问题类型：',
+              title: '问题类型',
               readonly: true,
               value: 'probelmType',
               pickerOptions: [
@@ -312,31 +312,31 @@ export default {
             },
             {
               type: 'date',
-              title: '发现时间：',
+              title: '发现时间',
               readonly: true,
               value: 'discoverTime'
             },
             {
               type: 'textarea',
-              title: '问题详情：',
+              title: '问题详情',
               readonly: true,
               value: 'problemDetail'
             },
             {
               type: 'uploadImg',
-              title: '问题图片：',
+              title: '问题图片',
               readonly: true,
               value: 'attachment'
             },
             {
               type: 'input',
-              title: '发现单位：',
+              title: '发现单位',
               readonly: true,
               value: 'createUnitName'
             },
             {
               type: 'input',
-              title: '整改单位：',
+              title: '整改单位',
               readonly: true,
               value: 'rectifyUnitName'
             },
@@ -346,20 +346,20 @@ export default {
             },
             {
               type: 'input',
-              title: '整改措施：',
+              title: '整改措施',
               readonly: true,
               value: 'correctiveMeasures'
             },
             {
               type: 'uploadImg',
-              title: '整改前图片：',
+              title: '整改前图片',
               readonly: true,
               value: 'rectificationBeforePicture',
               imgName: 'rectificationBeforePictureName'
             },
             {
               type: 'uploadImg',
-              title: '整改后图片：',
+              title: '整改后图片',
               readonly: true,
               value: 'rectificationAfterPicture',
               imgName: 'rectificationAfterPictureName'
@@ -374,19 +374,19 @@ export default {
               },
               {
                 type: 'input',
-                title: '督查结果：',
+                title: '督查结果',
                 readonly: true,
                 value: 'superviseResult'
               },
               {
                 type: 'date',
-                title: '督查时间：',
+                title: '督查时间',
                 readonly: true,
                 value: 'superviseTime'
               },
               {
                 type: 'uploadImg',
-                title: '现场图片：',
+                title: '现场图片',
                 readonly: true,
                 value: 'supervisePricture'
               }
@@ -397,13 +397,13 @@ export default {
           result = [
             {
               type: 'input',
-              title: '问题名称：',
+              title: '问题名称',
               readonly: true,
               value: 'problemName'
             },
             {
               type: 'input',
-              title: '问题类型：',
+              title: '问题类型',
               readonly: true,
               value: 'probelmType',
               pickerOptions: [
@@ -439,31 +439,31 @@ export default {
             },
             {
               type: 'date',
-              title: '发现时间：',
+              title: '发现时间',
               readonly: true,
               value: 'discoverTime'
             },
             {
               type: 'textarea',
-              title: '问题详情：',
+              title: '问题详情',
               readonly: true,
               value: 'problemDetail'
             },
             {
               type: 'uploadImg',
-              title: '问题图片：',
+              title: '问题图片',
               readonly: true,
               value: 'attachment'
             },
             {
               type: 'input',
-              title: '发现单位：',
+              title: '发现单位',
               readonly: true,
               value: 'createUnitName'
             },
             {
               type: 'input',
-              title: '整改单位：',
+              title: '整改单位',
               readonly: true,
               value: 'rectifyUnitName'
             },
@@ -473,20 +473,20 @@ export default {
             },
             {
               type: 'input',
-              title: '整改措施：',
+              title: '整改措施',
               readonly: true,
               value: 'correctiveMeasures'
             },
             {
               type: 'uploadImg',
-              title: '整改前图片：',
+              title: '整改前图片',
               readonly: true,
               value: 'rectificationBeforePicture',
               imgName: 'rectificationBeforePictureName'
             },
             {
               type: 'uploadImg',
-              title: '整改后图片：',
+              title: '整改后图片',
               readonly: true,
               value: 'rectificationAfterPicture',
               imgName: 'rectificationAfterPictureName'
@@ -501,19 +501,19 @@ export default {
               },
               {
                 type: 'input',
-                title: '督查结果：',
+                title: '督查结果',
                 readonly: true,
                 value: 'superviseResult'
               },
               {
                 type: 'date',
-                title: '督查时间：',
+                title: '督查时间',
                 readonly: true,
                 value: 'superviseTime'
               },
               {
                 type: 'uploadImg',
-                title: '现场图片：',
+                title: '现场图片',
                 readonly: true,
                 value: 'supervisePricture'
               }
@@ -527,13 +527,13 @@ export default {
             },
             {
               type: 'textarea',
-              title: '办结评价：',
+              title: '办结评价',
               readonly: true,
               value: 'concludeEvaluate'
             },
             {
               type: 'star',
-              title: '质量评价：',
+              title: '质量评价',
               readonly: true,
               value: 'qualityEvaluate'
             }
@@ -653,7 +653,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: #f6f7fb;
+  // background: #f6f7fb;
   box-sizing: border-box;
   padding: 8px 16px;
 }
