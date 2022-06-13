@@ -1,12 +1,9 @@
 'use strict'
-import Vue from 'vue'
 import axios from 'axios'
 import config from './config'
-import router from '@/router'
 import { Toast } from 'vant';
-// import { getToken } from '@/utils/token'
+import { getToken } from '@/utils/token'
 
-Vue.use(router)
 
 // 加密开关
 const _axios = axios.create(config)
@@ -15,15 +12,14 @@ const handleError = (res) => {
   const { status } = res
   if (status === 401) {
     Toast.fail('token已过期')
-    router.push({ path: '/login' })
   }
 }
 
 // http request 拦截器
 _axios.interceptors.request.use(
   config => {
-    config.headers.Authriozation = '707dc9d9d1b643f8b2f60a1b3e89c3fd'
-    config.headers.userId = 22
+    config.headers.Authriozation = getToken() ? getToken().token : ''
+    config.headers.userId = getToken() ? getToken().id : ''
     return config
   },
   err => {

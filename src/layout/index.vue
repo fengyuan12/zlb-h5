@@ -12,6 +12,7 @@
 
 <script>
 import infoApi from '@/api/info/index'
+import { getToken } from '@/utils/token'
 export default {
   components: {
     NavBar: () => import('./components/NavBar')
@@ -44,6 +45,9 @@ export default {
   },
   methods: {
     async handleInfoStatus() {
+      if (!getToken()) {
+        return
+      }
       this.infoStatus = false
       // 设置消息是否未读
       const result = await infoApi.getUnreadMessage()

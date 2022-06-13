@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="isNormal ? 'normal_score_form' : 'elder_score_form'">
     <div class="form_remark" v-if="itemInfo.type === 'remark'">
       <span>注意：<br />
         1.企业在本单位内发生影响较大的生态环境事件实行考核“一票否决制”；<br />
@@ -58,6 +58,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    isNormal: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
@@ -76,64 +80,129 @@ export default {
 
 
 <style lang="scss" scoped>
-.form_remark {
-  box-sizing: border-box;
-  padding: 16px;
-  background: #FFFFFF;
-  border-radius: 6px;
-  line-height: 24px;
-}
-
-.form_body {
-  margin-top: 10px;
-  padding: 0 16px 16px 16px;
-  background: #FFFFFF;
-  border-radius: 6px;
-  line-height: 24px;
-}
-
-.divider {
-  background: #F6F6F8;
-  margin: 12px 0;
-  width: 100%;
-  height: 1px;
-}
-
-.form_item_title {
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.form_item_sub_title {
-  margin: 8px 0;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  color: #2784FF;
-}
-
-.form_item_sub_divider {
-  display: inline-block;
-  margin: 0 12px;
-  width: 1px;
-  height: 12px;
-  background: #DADADA;
-}
-
-.form_item_input {
-  // background: #F6F7FB;
-  padding: 0 8px;
-  height: 36px;
-  border: none;
-  outline: none;
-  width: 100%;
-  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color : #B3B5B9;
+.normal_score_form {
+  .form_remark {
+    box-sizing: border-box;
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    line-height: 24px;
   }
-  &:disabled {
-    background: #fff;
+
+  .form_body {
+    margin-top: 10px;
+    padding: 0 16px 16px 16px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    line-height: 24px;
+  }
+
+  .divider {
+    background: #F6F6F8;
+    margin: 12px 0;
+    width: 100%;
+    height: 1px;
+  }
+
+  .form_item_title {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .form_item_sub_title {
+    margin: 8px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #2784FF;
+  }
+
+  .form_item_sub_divider {
+    display: inline-block;
+    margin: 0 12px;
+    width: 1px;
+    height: 12px;
+    background: #DADADA;
+  }
+
+  .form_item_input {
+    // background: #F6F7FB;
+    padding: 0 8px;
+    height: 36px;
+    border: none;
+    outline: none;
+    width: 100%;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color : #B3B5B9;
+    }
+    &:disabled {
+      background: #fff;
+    }
+  }
+}
+
+.elder_score_form {
+  .form_remark {
+    box-sizing: border-box;
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    line-height: 24px;
+  }
+
+  .form_body {
+    margin-top: 10px;
+    padding: 0 16px 16px 16px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    line-height: 24px;
+  }
+
+  .divider {
+    background: #F6F6F8;
+    margin: 12px 0;
+    width: 100%;
+    height: 1px;
+  }
+
+  .form_item_title {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .form_item_sub_title {
+    margin: 8px 0;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    color: #2784FF;
+  }
+
+  .form_item_sub_divider {
+    display: inline-block;
+    margin: 0 12px;
+    width: 1px;
+    height: 12px;
+    background: #DADADA;
+  }
+
+  .form_item_input {
+    // background: #F6F7FB;
+    padding: 0 8px;
+    height: 36px;
+    border: none;
+    outline: none;
+    width: 100%;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color : #B3B5B9;
+    }
+    &:disabled {
+      background: #fff;
+    }
   }
 }
 </style>

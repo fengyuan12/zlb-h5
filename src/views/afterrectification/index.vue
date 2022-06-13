@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="isNormal ? 'normal_container' : 'elder_container'">
     <div class="header">
       <div class="header_content">
         <img class="header_content_icon" src="@/assets/img/question/search.png" />
@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="body">
-      <Form v-for="(item, index) of listData" :key="index" :item-info="item" @handleCardClick="handleCardClick" />
+      <Form :is-normal="isNormal" v-for="(item, index) of listData" :key="index" :item-info="item" @handleCardClick="handleCardClick" />
       <van-empty v-if="!listData || listData.length === 0" description="暂无数据" />
     </div>
   </div>
@@ -15,7 +15,10 @@
 
 <script>
 import Api from '@/api/question/index'
+import { UiStyle } from '@/mixins/uistyle'
+import { getToken } from '@/utils/token'
 export default {
+  mixins: [UiStyle],
   components: {
     Form: () => import('./components/Form')
   },
@@ -44,7 +47,7 @@ export default {
     async fetchData() {
       const { key, keywords } = this
       const params = {
-        id: 22,
+        id: getToken() ? getToken().id : '',
         keywords
       }
       const result = key === 1 ? await Api.getAfterRectificationData(params) : await Api.getCorrectedData(params)
@@ -65,37 +68,77 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  padding: 8px 16px;
+.normal_container {
+  .header {
+    padding: 8px 16px;
+  }
+
+  .header_content {
+    background: #F6F7FB;
+    border-radius: 20px;
+    border: 1px solid #F2F3F5;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+  }
+
+  .header_content_icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .header_content_input {
+    border: none;
+    outline: none;
+    padding: 0 8px;
+    background-color: inherit;
+    flex: 1;
+  }
+
+  .body {
+    // background: #F6F7FB;
+    padding: 8px 0px;
+    box-sizing: border-box;
+    min-height: calc(100vh - 62px);
+  }
 }
 
-.header_content {
-  background: #F6F7FB;
-  border-radius: 20px;
-  border: 1px solid #F2F3F5;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-}
+// 长辈版
+.elder_container {
+  font-size: 18px;
+  .header {
+    padding: 8px 16px;
+  }
 
-.header_content_icon {
-  width: 16px;
-  height: 16px;
-}
+  .header_content {
+    background: #F6F7FB;
+    border-radius: 20px;
+    border: 1px solid #F2F3F5;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+  }
 
-.header_content_input {
-  border: none;
-  outline: none;
-  padding: 0 8px;
-  background-color: inherit;
-  flex: 1;
-}
+  .header_content_icon {
+    width: 18px;
+    height: 18px;
+  }
 
-.body {
-  // background: #F6F7FB;
-  padding: 8px 0px;
-  box-sizing: border-box;
-  min-height: calc(100vh - 62px);
+  .header_content_input {
+    border: none;
+    outline: none;
+    padding: 0 8px;
+    background-color: inherit;
+    flex: 1;
+  }
+
+  .body {
+    // background: #F6F7FB;
+    padding: 8px 0px;
+    box-sizing: border-box;
+    min-height: calc(100vh - 62px);
+  }
 }
 </style>

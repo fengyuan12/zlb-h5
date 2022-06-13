@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="isNormal ? 'normal_container' : 'elder_container'">
     <div v-if="itemInfo.type === 'input'">
       <!-- 文本 -->
       <div class="question_form_box">
@@ -20,6 +20,19 @@
         </div>
         <div style="flex: 1;" @click="handlePicker">
           <input class="question_form_item_input" readonly :value="itemInfo.pickerOptions[formData[itemInfo.value]]" :placeholder="`请选择${itemInfo.title}`" />
+        </div>
+      </div>
+      <div class="question_divider"></div>
+    </div>
+    <!-- 自定义下拉框 -->
+    <div v-if="itemInfo.type === 'custom_picker'">
+      <!-- 选择框 -->
+      <div class="question_form_box">
+        <div class="question_form_item_label">
+          <span>{{itemInfo.title}}</span>
+        </div>
+        <div style="flex: 1;" @click="handlePicker">
+          <input class="question_form_item_input" readonly :value="formData[itemInfo.value]" :placeholder="`请选择${itemInfo.title}`" />
         </div>
       </div>
       <div class="question_divider"></div>
@@ -102,13 +115,24 @@
         @cancel="showPicker = false"
         @confirm="onDateConfirm"
       />
+      <van-picker
+        v-if="itemInfo.type === 'custom_picker'"
+        show-toolbar
+        :columns="itemInfo.pickerOptions"
+        :default-index="pickerIndex"
+        @cancel="showPicker = false"
+        @confirm="customConfirm"
+      />
     </van-popup>
   </div>
 </template>
 
 <script>
 import moment from 'dayjs'
+import { UiStyle } from '@/mixins/uistyle'
+import { getToken } from '@/utils/token'
 export default {
+  mixins: [UiStyle],
   props: {
     itemInfo: {
       type: Object,
@@ -127,12 +151,23 @@ export default {
     return {
       showPicker: false,
       pickerIndex: 0,
-      currentDate: new Date()
+      currentDate: new Date(),
+      tokenInfo: getToken() || {
+        unitName: ''
+      }
     }
   },
   methods: {
     onConfirm(value, index) {
       this.formData[this.itemInfo.value] = index
+      this.showPicker = false
+    },
+    customConfirm(value) {
+      let val = value
+      if (val === '实名') {
+        val = this.tokenInfo.unitName
+      }
+      this.formData[this.itemInfo.value] = val
       this.showPicker = false
     },
     onDateConfirm(value) {
@@ -180,146 +215,294 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.question_form_box {
-  box-sizing: border-box;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  border-radius: 6px;
-  line-height: 44px;
-}
-
-.question_form_item_label {
-  display: inline-block;
-  color: #666666;
-  width: 80px;
-}
-
-.question_form_item_input {
-  background-color: inherit;
-  width: 100%;
-  line-height: 44px;
-  border: none;
-  outline: none;
-  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color : #B3B5B9;
+.normal_container {
+  .question_form_box {
+    box-sizing: border-box;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    line-height: 44px;
   }
-}
 
-.question_form_textarea {
-  box-sizing: border-box;
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  border-radius: 6px;
-  textarea {
+  .question_form_item_label {
+    display: inline-block;
+    color: #666666;
+    width: 80px;
+  }
+
+  .question_form_item_input {
+    background-color: inherit;
+    width: 100%;
+    line-height: 44px;
     border: none;
     outline: none;
-    resize: none;
-    height: 80px;
-    line-height: 1.5;
-    padding-bottom: 8px;
     &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
       color : #B3B5B9;
     }
-    &:disabled {
-      background: #fff;
-    }
   }
-}
 
-.question_form_textarea_label {
-  color: #666666;
-  line-height: 44px;
-}
-
-.question_divider {
-  height: 1px;
-  background: #E8E9EC;
-  margin: 4px 0;
-}
-
-.question_upload_box {
-  display: flex;
-  flex-wrap: wrap;
-  padding-bottom: 18px;
-}
-
-.question_upload_box_img {
-  margin: 0 8px 8px 0;
-  width: 100px;
-  height: 100px;
-}
-
-.question_upload_box_custom {
-  margin: 0 8px 8px 0;
-  width: 100px;
-  height: 100px;
-  background: #EBF3FE;
-  border-radius: 8px;
-  align-items: center;
-  .custom_content {
-    width: 36px;
-    height: 36px;
-    background: #428FFC;
-    border-radius: 50%;
-    align-items: center;
-    .content_plus {
-      width: 18px;
-      height: 18px;
-      position: relative;
-      box-sizing: border-box;
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 8px;
-        width: 100%;
-        height: 2px;
-        background-color: #fff;
+  .question_form_textarea {
+    box-sizing: border-box;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    textarea {
+      border: none;
+      outline: none;
+      resize: none;
+      height: 80px;
+      line-height: 1.5;
+      padding-bottom: 8px;
+      &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color : #B3B5B9;
       }
-      &::after {
-        content: "";
-        position: absolute;
-        left: 8px;
-        top: 0;
-        width: 2px;
-        height: 100%;
-        background-color: #fff;
+      &:disabled {
+        background: #fff;
       }
     }
   }
-}
 
-.question_form_text {
-  display: flex;
-  align-items: center;
-  margin: 16px 0;
-}
+  .question_form_textarea_label {
+    color: #666666;
+    line-height: 44px;
+  }
 
-.question_form_text_icon {
-  width: 3px;
-  height: 14px;
-  background: #2784FF;
-  border-radius: 1px;
-  margin-right: 6px;
-}
+  .question_divider {
+    height: 1px;
+    background: #E8E9EC;
+    margin: 4px 0;
+  }
 
-.question_star_icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-}
+  .question_upload_box {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 18px;
+  }
 
-.qustion_form_star {
-  display: flex;
-  align-items: center;
-}
-
-@media (max-width: 360px) {
-  .question_form_item_label {
+  .question_upload_box_img {
+    margin: 0 8px 8px 0;
     width: 100px;
+    height: 100px;
+  }
+
+  .question_upload_box_custom {
+    margin: 0 8px 8px 0;
+    width: 100px;
+    height: 100px;
+    background: #EBF3FE;
+    border-radius: 8px;
+    align-items: center;
+    .custom_content {
+      width: 36px;
+      height: 36px;
+      background: #428FFC;
+      border-radius: 50%;
+      align-items: center;
+      .content_plus {
+        width: 18px;
+        height: 18px;
+        position: relative;
+        box-sizing: border-box;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 8px;
+          width: 100%;
+          height: 2px;
+          background-color: #fff;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          left: 8px;
+          top: 0;
+          width: 2px;
+          height: 100%;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  .question_form_text {
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+  }
+
+  .question_form_text_icon {
+    width: 3px;
+    height: 14px;
+    background: #2784FF;
+    border-radius: 1px;
+    margin-right: 6px;
+  }
+
+  .question_star_icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+
+  .qustion_form_star {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 360px) {
+    .question_form_item_label {
+      width: 100px;
+    }
   }
 }
 
+// 长辈版
+.elder_container {
+  font-size: 18px;
+  .question_form_box {
+    box-sizing: border-box;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    line-height: 44px;
+  }
+
+  .question_form_item_label {
+    display: inline-block;
+    color: #666666;
+    width: 80px;
+  }
+
+  .question_form_item_input {
+    background-color: inherit;
+    width: 100%;
+    line-height: 44px;
+    border: none;
+    outline: none;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color : #B3B5B9;
+    }
+  }
+
+  .question_form_textarea {
+    box-sizing: border-box;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    textarea {
+      border: none;
+      outline: none;
+      resize: none;
+      height: 80px;
+      line-height: 1.5;
+      padding-bottom: 8px;
+      &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color : #B3B5B9;
+      }
+      &:disabled {
+        background: #fff;
+      }
+    }
+  }
+
+  .question_form_textarea_label {
+    color: #666666;
+    line-height: 44px;
+  }
+
+  .question_divider {
+    height: 1px;
+    background: #E8E9EC;
+    margin: 4px 0;
+  }
+
+  .question_upload_box {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 18px;
+  }
+
+  .question_upload_box_img {
+    margin: 0 8px 8px 0;
+    width: 100px;
+    height: 100px;
+  }
+
+  .question_upload_box_custom {
+    margin: 0 8px 8px 0;
+    width: 100px;
+    height: 100px;
+    background: #EBF3FE;
+    border-radius: 8px;
+    align-items: center;
+    .custom_content {
+      width: 36px;
+      height: 36px;
+      background: #428FFC;
+      border-radius: 50%;
+      align-items: center;
+      .content_plus {
+        width: 18px;
+        height: 18px;
+        position: relative;
+        box-sizing: border-box;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 8px;
+          width: 100%;
+          height: 2px;
+          background-color: #fff;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          left: 8px;
+          top: 0;
+          width: 2px;
+          height: 100%;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  .question_form_text {
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+    font-size: 22px;
+  }
+
+  .question_form_text_icon {
+    width: 3px;
+    height: 18px;
+    background: #2784FF;
+    border-radius: 1px;
+    margin-right: 6px;
+  }
+
+  .question_star_icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+
+  .qustion_form_star {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 360px) {
+    .question_form_item_label {
+      width: 100px;
+    }
+  }
+}
 </style>

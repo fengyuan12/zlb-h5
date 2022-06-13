@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="isNormal ? 'normal_container' : 'elder_container'">
     <div class="header">
       <div class="header_content">
         <img class="header_content_icon" src="@/assets/img/question/search.png" />
@@ -72,7 +72,9 @@ import safetyratingApi from '@/api/star/safetyrating' // 安全生产“星级�
 import safetyApi from '@/api/correction/safety' // 企业安全生产责任制
 import miningApi from '@/api/correction/mining' // 工矿企业
 import labourApi from '@/api/correction/labour' // 劳动密集型企业
+import { UiStyle } from '@/mixins/uistyle'
 export default {
+  mixins: [UiStyle],
   data() {
     return {
       type: 'CORRECTION', // CORRECTION: 企业自查自纠； STAR: 星级评定
@@ -188,86 +190,175 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  padding: 8px 16px;
+.normal_container {
+  .header {
+    padding: 8px 16px;
+  }
+
+  .header_content {
+    background: #F6F7FB;
+    border-radius: 20px;
+    border: 1px solid #F2F3F5;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+  }
+
+  .header_content_icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .header_content_input {
+    padding: 0 8px;
+    border: none;
+    background-color: inherit;
+    outline: none;
+    flex: 1;
+  }
+
+  .container {
+    min-height: calc(100vh - 62px);
+    // background: #F6F7FB;
+    box-sizing: border-box;
+    padding: 16px;
+  }
+
+  .card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    // padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  .card_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .card_title_icon {
+    width: 56px;
+    height: 22px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: #F6F7FB;
+    margin: 12px 0;
+  }
+
+  .card_item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .card_item_icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .card_item_title {
+    padding: 0 20px 0 4px;
+    color: #666666;
+  }
+
+  .card_item_content{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
 }
 
-.header_content {
-  background: #F6F7FB;
-  border-radius: 20px;
-  border: 1px solid #F2F3F5;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-}
+// 长辈版
+.elder_container {
+  font-size: 18px;
+  .header {
+    padding: 8px 16px;
+  }
 
-.header_content_icon {
-  width: 16px;
-  height: 16px;
-}
+  .header_content {
+    background: #F6F7FB;
+    border-radius: 20px;
+    border: 1px solid #F2F3F5;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+  }
 
-.header_content_input {
-  padding: 0 8px;
-  border: none;
-  background-color: inherit;
-  outline: none;
-  flex: 1;
-}
+  .header_content_icon {
+    width: 18px;
+    height: 18px;
+  }
 
-.container {
-  min-height: calc(100vh - 62px);
-  // background: #F6F7FB;
-  box-sizing: border-box;
-  padding: 16px;
-}
+  .header_content_input {
+    padding: 0 8px;
+    border: none;
+    background-color: inherit;
+    outline: none;
+    flex: 1;
+  }
 
-.card {
-  background: #FFFFFF;
-  border-radius: 6px;
-  // padding: 12px;
-  margin-bottom: 8px;
-}
+  .container {
+    min-height: calc(100vh - 62px);
+    // background: #F6F7FB;
+    box-sizing: border-box;
+    padding: 16px;
+  }
 
-.card_title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
+  .card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    // padding: 12px;
+    margin-bottom: 8px;
+  }
 
-.card_title_icon {
-  width: 56px;
-  height: 22px;
-}
+  .card_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
 
-.divider {
-  width: 100%;
-  height: 1px;
-  background: #F6F7FB;
-  margin: 12px 0;
-}
+  .card_title_icon {
+    width: 56px;
+    height: 22px;
+  }
 
-.card_item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: #F6F7FB;
+    margin: 12px 0;
+  }
 
-.card_item_icon {
-  width: 12px;
-  height: 12px;
-}
+  .card_item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
 
-.card_item_title {
-  padding: 0 20px 0 4px;
-  color: #666666;
-}
+  .card_item_icon {
+    width: 18px;
+    height: 18px;
+  }
 
-.card_item_content{
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  flex: 1;
+  .card_item_title {
+    padding: 0 20px 0 4px;
+    color: #666666;
+  }
+
+  .card_item_content{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
 }
 </style>

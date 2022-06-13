@@ -13,11 +13,20 @@ files.keys().forEach(key => {
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
+  state: {
+    uiStyle: 'normal'
+  },
+  mutations: {
+    setUiStyle(state, data) {
+      state.uiStyle = data
+    }
+  },
   plugins: [createPersistedState({
     /* sessionStorage 可配置 */
     storage: window.localStorage,
     reducer(stores) {
       return {
+        uiStyle: stores.uiStyle
         // 账号信息相关信息存储，与实习业务挂钩的不需要缓存的不写入这里
         // account: stores.account,
         // common: stores.common,

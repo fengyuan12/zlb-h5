@@ -1,5 +1,5 @@
 <template>
-  <div class="mine_container">
+  <div :class="isNormal ? 'normal_mine_container' : 'elder_mine_container'">
     <img class="mine_bg" src="@/assets/img/mine/bg.png" />
     <div class="mine_header">
       <img class="mine_avator" :src="userInfo.avatarUrl" />
@@ -25,7 +25,10 @@
 </template>
 
 <script>
+import { UiStyle } from '@/mixins/uistyle'
+import { getToken } from '@/utils/token'
 export default {
+  mixins: [UiStyle],
   data() {
     return {
       userInfo: {
@@ -45,8 +48,8 @@ export default {
           title: '退出账号'
         }
       ],
-      tokenInfo: {
-
+      tokenInfo: getToken() ? getToken() : {
+        unitName: ''
       }
     }
   },
@@ -68,98 +71,193 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mine_container {
+.normal_mine_container {
   position: relative;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  .mine_bg {
+    width: 100%;
+    height: 144px;
+    position: absolute;
+    z-index: 1;
+  }
+
+  /* 头部内容 */
+  .mine_header {
+    top: 24px;
+    left: 10px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+  }
+
+  /* 头像 */
+  .mine_avator {
+    width: 54px;
+    height: 54px;
+    box-shadow: 0px 8px 12px -4px rgba(33, 41, 69, 0.11);
+    border-radius: 50%;
+    /* opacity: 0.6; */
+    border: 2px solid #F6F7FB;
+  }
+
+  .mine_title {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+  }
+
+  .mine_title_text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #FFFFFF;
+  }
+
+  .mine_star_icon {
+    margin-top: 8px;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+  }
+
+  /* 卡片容器 */
+  .mine_body {
+    position: absolute;
+    top: 100px;
+    z-index: 3;
+    height: 180px;
+    width: 92%;
+    margin: 0 16px;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 14px -2px rgba(77, 125, 249, 0.1);
+    border-radius: 6px;
+  }
+
+  .mine_body_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 28px 16px;
+  }
+
+  .mine_body_item_left {
+    display: flex;
+    align-items: center;
+  }
+
+  .mine_body_item_icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mine_body_item_text {
+    padding-left: 12px;
+    font-weight: 400;
+    color: #212945;
+  }
+
+  .mine_body_item_guide {
+    width: 14px;
+    height: 14px;
+  }
 }
 
-.mine_bg {
-  width: 100%;
-  height: 144px;
-  position: absolute;
-  z-index: 1;
-}
-
-/* 头部内容 */
-.mine_header {
-  top: 24px;
-  left: 10px;
+// 长辈版
+.elder_mine_container {
   position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-}
-
-/* 头像 */
-.mine_avator {
-  width: 54px;
-  height: 54px;
-  box-shadow: 0px 8px 12px -4px rgba(33, 41, 69, 0.11);
-  border-radius: 50%;
-  /* opacity: 0.6; */
-  border: 2px solid #F6F7FB;
-}
-
-.mine_title {
-  display: flex;
-  flex-direction: column;
-  margin-left: 12px;
-}
-
-.mine_title_text {
-  font-size: 18px;
-  font-weight: 500;
-  color: #FFFFFF;
-}
-
-.mine_star_icon {
-  margin-top: 8px;
-  width: 16px;
-  height: 16px;
-  margin-right: 6px;
-}
-
-/* 卡片容器 */
-.mine_body {
-  position: absolute;
-  top: 100px;
-  z-index: 3;
-  height: 180px;
-  width: 92%;
-  margin: 0 16px;
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
-  background: #FFFFFF;
-  box-shadow: 0px 2px 14px -2px rgba(77, 125, 249, 0.1);
-  border-radius: 6px;
-}
+  .mine_bg {
+    width: 100%;
+    height: 205px;
+    position: absolute;
+    z-index: 1;
+  }
 
-.mine_body_item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 28px 16px;
-}
+  /* 头部内容 */
+  .mine_header {
+    top: 24px;
+    left: 10px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+  }
 
-.mine_body_item_left {
-  display: flex;
-  align-items: center;
-}
+  /* 头像 */
+  .mine_avator {
+    width: 54px;
+    height: 54px;
+    box-shadow: 0px 8px 12px -4px rgba(33, 41, 69, 0.11);
+    border-radius: 50%;
+    /* opacity: 0.6; */
+    border: 2px solid #F6F7FB;
+  }
 
-.mine_body_item_icon {
-  width: 20px;
-  height: 20px;
-}
+  .mine_title {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+  }
 
-.mine_body_item_text {
-  padding-left: 12px;
-  font-weight: 400;
-  color: #212945;
-}
+  .mine_title_text {
+    font-size: 22px;
+    font-weight: 500;
+    color: #FFFFFF;
+  }
 
-.mine_body_item_guide {
-  width: 14px;
-  height: 14px;
+  .mine_star_icon {
+    margin-top: 8px;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+  }
+
+  /* 卡片容器 */
+  .mine_body {
+    position: absolute;
+    top: 100px;
+    z-index: 3;
+    height: 180px;
+    width: 92%;
+    margin: 0 16px;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 14px -2px rgba(77, 125, 249, 0.1);
+    border-radius: 6px;
+  }
+
+  .mine_body_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 28px 16px;
+  }
+
+  .mine_body_item_left {
+    display: flex;
+    align-items: center;
+  }
+
+  .mine_body_item_icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mine_body_item_text {
+    padding-left: 12px;
+    font-weight: 400;
+    font-size: 20px;
+    color: #212945;
+  }
+
+  .mine_body_item_guide {
+    width: 18px;
+    height: 18px;
+  }
 }
 </style>

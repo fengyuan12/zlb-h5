@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="isNormal ? 'normal_container' : 'elder_container'">
     <Form v-for="(item, index) of formList" :key="index" :form-item="item" :form-data="formData" />
     <div class="question_bg">
       <div class="question_content">
@@ -27,7 +27,9 @@ import {
   MINING_LIST,
   LABOUR_LIST } from '@/utils/constant'
 import moment from 'dayjs'
+import { UiStyle } from '@/mixins/uistyle'
 export default {
+  mixins: [UiStyle],
   components: {
     Form: () => import('./components/Form'),
     CustomButton: () => import('@/components/CustomButton')
@@ -121,45 +123,92 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.question_bg {
-  box-sizing: border-box;
-  background: #f6f7fb;
-  // padding: 0 16px 8px;
-  width: 100%;
-}
+.normal_container {
+  .question_bg {
+    box-sizing: border-box;
+    background: #f6f7fb;
+    // padding: 0 16px 8px;
+    width: 100%;
+  }
 
-.question_content {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 12px;
-  background: #ffffff;
-  border-radius: 6px;
-}
+  .question_content {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 6px;
+  }
 
-.qustion_divider {
-  background: #E8E9EC;
-  margin: 16px 0;
-  width: 100%;
-  height: 1px;
-}
+  .qustion_divider {
+    background: #E8E9EC;
+    margin: 16px 0;
+    width: 100%;
+    height: 1px;
+  }
 
-.card_textarea {
-  box-sizing: border-box;
-  height: 80px;
-  width: 100%;
-  // background: #f6f7fb;
-  outline: none;
-  border: none;
-  padding: 5px;
-  resize: none;
-  line-height: 1.5;
-  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color : #B3B5B9;
+  .card_textarea {
+    box-sizing: border-box;
+    height: 80px;
+    width: 100%;
+    // background: #f6f7fb;
+    outline: none;
+    border: none;
+    padding: 5px;
+    resize: none;
+    line-height: 1.5;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color : #B3B5B9;
+    }
+  }
+
+  .card_divider {
+    height: 8px;
+    background: #F6F7FB;
   }
 }
 
-.card_divider {
-  height: 8px;
-  background: #F6F7FB;
+.elder_container {
+  font-size: 18px;
+  .question_bg {
+    box-sizing: border-box;
+    background: #f6f7fb;
+    // padding: 0 16px 8px;
+    width: 100%;
+  }
+
+  .question_content {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 6px;
+  }
+
+  .qustion_divider {
+    background: #E8E9EC;
+    margin: 16px 0;
+    width: 100%;
+    height: 1px;
+  }
+
+  .card_textarea {
+    box-sizing: border-box;
+    height: 80px;
+    width: 100%;
+    // background: #f6f7fb;
+    outline: none;
+    border: none;
+    padding: 5px;
+    resize: none;
+    line-height: 1.5;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color : #B3B5B9;
+    }
+  }
+
+  .card_divider {
+    height: 8px;
+    background: #F6F7FB;
+  }
 }
 </style>

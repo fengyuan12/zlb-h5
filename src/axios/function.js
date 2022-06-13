@@ -10,7 +10,9 @@ import _axios from './index'
 export const _post = ({ url, params = {}, data }) => {
   return new Promise((resolve, reject) => {
     _axios
-      .post(url, data)
+      .post(url, data, {
+        params
+      })
       .then(response => {
         return resolve(response)
       })

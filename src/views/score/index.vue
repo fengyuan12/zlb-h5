@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <Form v-for="(item, index) of formList" :disabled="state >= 2" :key="index" :item-info="item" :form-data="formData" @handleKeyInput="handleKeyInput" />
+  <div :class="isNormal ? 'normal_container' : 'elder_container'">
+    <Form :is-normal="isNormal" v-for="(item, index) of formList" :disabled="state >= 2" :key="index" :item-info="item" :form-data="formData" @handleKeyInput="handleKeyInput" />
     <div style="padding: 0 16px">
       <CustomButton v-if="state < 2" @handleSumbit="handleSumbit" />
     </div>
@@ -15,6 +15,7 @@ import communitysafetyApi from '@/api/star/communitysafety' // 行政村、社�
 import schoolsafetyApi from '@/api/star/schoolsafety' // 学校安全生产责任制“星级”评分
 import medicalsafetyApi from '@/api/star/medicalsafety' // 医疗机构
 import infoApi from '@/api/info/index'
+import { UiStyle } from '@/mixins/uistyle'
 import {
   ECOLOGY_List,
   SCORE_MINING_LIST,
@@ -22,6 +23,7 @@ import {
   SCORE_SCHOOL_LIST,
   SCORE_FACILITY_LIST } from '@/utils/constant'
 export default {
+  mixins: [UiStyle],
   components: {
     Form: () => import('./components/Form'),
     CustomButton: () => import('@/components/CustomButton')
@@ -155,8 +157,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  background: #F6F7FB;;
+.normal_container {
+  background: #F6F7FB;
   box-sizing: border-box;
+}
+
+.elder_container {
+  background: #F6F7FB;
+  box-sizing: border-box;
+  font-size: 18px;
 }
 </style>

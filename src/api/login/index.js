@@ -1,29 +1,13 @@
-import { _get, _post } from '@/axios/function'
+import { _post } from '@/axios/function'
 
-const login = 'enterprise/openid?code={code}'
-const postMobile = 'enterprise/mobile'
+const postMobile = 'enterprise/zlbLogin'
 
 export default {
-  async login({ code }) {
-    return _get({
-      url: login,
-      params: {
-        code
-      }
-    })
-  },
-  async postMobile(data) {
+  async postMobile({ ticket }) {
     return _post({
       url: postMobile,
-      data
-    })
-  },
-  async testLogin({ username, password }) {
-    return _get({
-      url: 'login/login',
       params: {
-        username,
-        password
+        ticket
       }
     })
   }

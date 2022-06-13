@@ -1,19 +1,21 @@
 <template>
   <div>
-    <div class="header" v-if="itemList.length > 0">
+    <div :class="isNormal ? 'normal_header' : 'elder_header'" v-if="itemList.length > 0">
       <div class="header_content" @click="handleClear">
         <span>一键清除</span>
         <img class="clear_icon" src="@/assets/img/info/info_clear.png" />
       </div>
     </div>
-    <CustomInfo v-for="(item, index) of itemList" :key="index" :item-info="item" @cardClick="handleCardClick" />
+    <CustomInfo :is-normal="isNormal" v-for="(item, index) of itemList" :key="index" :item-info="item" @cardClick="handleCardClick" />
     <van-empty v-if="!itemList || itemList.length === 0" description="暂无数据" />
   </div>
 </template>
 
 <script>
+import { UiStyle } from '@/mixins/uistyle'
 import Api from '@/api/info/index'
 export default {
+  mixins: [UiStyle],
   components: {
     CustomInfo: () => import('./components/CustomInfo')
   },
@@ -117,21 +119,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
+// 正常版本
+.normal_header {
   text-align: right;
   padding: 28px 18px 0 18px;
   display: flex;
   flex-direction: row-reverse;
+
+  .header_content {
+    display: flex;
+    align-items: center;
+  }
+
+  .clear_icon {
+    margin-left: 4px;
+    width: 20px;
+    height: 20px;
+  }
 }
 
-.header_content {
+// 长辈版
+.elder_header {
+  text-align: right;
+  padding: 28px 18px 0 18px;
   display: flex;
-  align-items: center;
-}
+  flex-direction: row-reverse;
+  font-size: 22px;
 
-.clear_icon {
-  margin-left: 4px;
-  width: 20px;
-  height: 20px;
+  .header_content {
+    display: flex;
+    align-items: center;
+  }
+
+  .clear_icon {
+    margin-left: 4px;
+    width: 32px;
+    height: 32px;
+  }
 }
 </style>

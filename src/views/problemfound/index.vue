@@ -7,6 +7,7 @@
 
 <script>
 import Api from '@/api/question/index'
+import { getToken } from '@/utils/token'
 export default {
   components: {
     QuestionForm: () => import('@/components/QuestionForm'),
@@ -43,10 +44,10 @@ export default {
           imgName: 'cluePictureName'
         },
         {
-          type: 'input',
+          type: 'custom_picker',
           title: '发现人',
-          readonly: true,
-          value: 'createUnitName'
+          value: 'createUnitName',
+          pickerOptions: ['匿名', '实名']
         },
         {
           type: 'picker',
@@ -112,6 +113,10 @@ export default {
         this.$Toast.fail('问题图片不能为空')
         return
       }
+      if (!formData.createUnitName) {
+        this.$Toast.fail('发现人不能为空')
+        return
+      }
       if (!formData.rectifyUnitId) {
         this.$Toast.fail('问题单位不能为空')
         return
@@ -123,6 +128,7 @@ export default {
           formData.rectifyUnitName = data.unitName
         }
       }
+      formData.createUnitId = getToken() ? getToken().id : ''
       const result = await Api.postCule(formData)
       if (result.code === '200') {
         this.$Toast.success('保存成功')

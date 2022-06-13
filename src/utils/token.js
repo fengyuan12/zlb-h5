@@ -15,7 +15,7 @@ export function setToken(key, value) {
   return Cookies.set(key, value ? JSON.stringify(value) : '')
 }
 
-export function removeToken(key) {
+export function removeToken(key = TOKEN) {
   return Cookies.remove(key)
 }
 
