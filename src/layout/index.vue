@@ -46,6 +46,10 @@ export default {
   methods: {
     async handleInfoStatus() {
       if (!getToken()) {
+        this.$EventBus.$on('eventName', () => {
+          console.log('登录成功后，触发消息接口')
+          this.handleInfoStatus()
+        })
         return
       }
       this.infoStatus = false

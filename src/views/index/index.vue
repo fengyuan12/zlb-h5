@@ -95,6 +95,7 @@ export default {
     }
   },
   mounted() {
+    console.log('环境变量：', process.env.NODE_ENV)
     this.initData()
     // 生产
     if (!window.location.href.includes('ticket')) { // 第一次进入
@@ -119,9 +120,10 @@ export default {
         return
       }
       // 开发
-      // const ticket = '8a1189b5814447bf01815fbd357a472f-ticket'
+      // const ticket = '8a1189b881444814018160cbb4612397-ticket'
       const result = await Api.postMobile({ ticket })
       if (result.code === '200') {
+        this.$EventBus.$emit('eventName')
         setToken(TOKEN, result.data)
       } else {
         window.location.href = 'https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&servicecode=BCDSGA_0a7098c805e2b9ad941388ee2ca5eba2&redirectUrl=https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2002207375/lastTest/index.html?debug=true'

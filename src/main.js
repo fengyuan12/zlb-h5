@@ -9,6 +9,7 @@ import _ from 'lodash'
 import base from './base.js'
 Vue.use(base)
 Vue.prototype.$_ = _
+Vue.prototype.$EventBus = new Vue()
 Vue.config.productionTip = false
 
 new Vue({

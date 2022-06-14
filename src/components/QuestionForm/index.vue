@@ -67,7 +67,7 @@
         </div>
         <div class="question_upload_box">
           <div v-if="formData[itemInfo.value] && formData[itemInfo.value].length > 0">
-            <img v-for="(item, index) of formData[itemInfo.value]" :key="index" class="question_upload_box_img" :src="item" @click="handleView(index, formData[itemInfo.value])" />
+            <img v-for="(item, index) of formData[itemInfo.value]" :key="index" class="question_upload_box_img" :src="item" @click="handleView(index, formData[itemInfo.value])" @touchstart="touchStart" @touchend="touchEnd" />
           </div>
           <div v-if="!itemInfo.readonly" @click="handleUpload" class="question_upload_box_custom" flex="main:center">
             <div class="custom_content" flex="main:center">
@@ -154,7 +154,8 @@ export default {
       currentDate: new Date(),
       tokenInfo: getToken() || {
         unitName: ''
-      }
+      },
+      touchTimer: null
     }
   },
   methods: {
@@ -195,6 +196,32 @@ export default {
         images,
         startPosition
       })
+    },
+    touchStart(index) {
+      if (this.itemInfo.readonly) {
+        return
+      }
+      const _this = this
+      //手指触摸
+      this.touchTimer && clearTimeout(this.touchTimer)
+      this.touchTimer = setTimeout(() => {
+        this.$dialog.confirm({
+          message: '确定删除吗？'
+        }).then(() => {
+          _this.formData[_this.itemInfo.value].splice(index, 1)
+          _this.formData[_this.itemInfo.imgName].splice(index, 1)
+        }).catch(() => {
+          console.log('点击了取消')
+        })
+      }, 1500)
+    },
+    touchEnd() {
+      if (this.itemInfo.readonly) {
+        return
+      }
+      //手指离开
+      console.log(1)
+      this.touchTimer && clearTimeout(this.touchTimer)
     },
     handleUpload() {
       const { formData, itemInfo } = this
