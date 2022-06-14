@@ -193,13 +193,13 @@ export default {
     },
     handleView(startPosition, images) {
       // eslint-disable-next-line no-undef
-      ZWJSBridge.saveImage({
-        url: images[startPosition]
-      }).then((result) => {
-          console.log(result);
-      }).catch((error) => {
-          console.log(error);
-      });
+      // ZWJSBridge.saveImage({
+      //   url: images[startPosition]
+      // }).then((result) => {
+      //     console.log(result);
+      // }).catch((error) => {
+      //     console.log(error);
+      // });
       ImagePreview({
         images,
         startPosition
