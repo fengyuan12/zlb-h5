@@ -96,6 +96,7 @@ export default {
   },
   mounted() {
     this.initData()
+    // 生产
     if (!window.location.href.includes('ticket')) { // 第一次进入
       removeToken()
       window.location.href = 'https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&servicecode=BCDSGA_0a7098c805e2b9ad941388ee2ca5eba2&redirectUrl=https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2002207375/lastTest/index.html?debug=true'
@@ -103,14 +104,22 @@ export default {
     if (!getToken() && window.location.href.includes('ticket')) { // 如果token 为空 调用接口
       this.init()
     }
+    // 开发
+    // if (!getToken()) {
+    //   removeToken()
+    //   this.init()
+    // }
   },
   methods: {
     async init() {
+      // 生产
       const ticket = this.getQuery('ticket')
       if (!ticket) {
         console.log('获取票据失败')
         return
       }
+      // 开发
+      // const ticket = '8a1189b5814447bf01815fbd357a472f-ticket'
       const result = await Api.postMobile({ ticket })
       if (result.code === '200') {
         setToken(TOKEN, result.data)
@@ -320,8 +329,6 @@ export default {
 
   .star-class-icon {
     position: absolute;
-    height: 50px;
-    width: 43px;
     top: 6px;
     left: 14px;
     z-index: 2;

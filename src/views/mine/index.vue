@@ -26,7 +26,7 @@
 
 <script>
 import { UiStyle } from '@/mixins/uistyle'
-import { getToken } from '@/utils/token'
+import { getToken, removeToken } from '@/utils/token'
 export default {
   mixins: [UiStyle],
   data() {
@@ -61,7 +61,11 @@ export default {
         case 2:
           this.$router.push({ path: '/afterrectification', query: { key }})
           break;
-
+        case 3:
+          // eslint-disable-next-line no-undef
+          ZWJSBridge.close() // 关闭
+          removeToken()
+          break;
         default:
           break;
       }
