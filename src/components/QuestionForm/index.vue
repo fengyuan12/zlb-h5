@@ -192,6 +192,14 @@ export default {
       this.showPicker = true
     },
     handleView(startPosition, images) {
+      // eslint-disable-next-line no-undef
+      ZWJSBridge.saveImage({
+        url: images[startPosition]
+      }).then((result) => {
+          console.log(result);
+      }).catch((error) => {
+          console.log(error);
+      });
       ImagePreview({
         images,
         startPosition
@@ -213,7 +221,7 @@ export default {
         }).catch(() => {
           console.log('点击了取消')
         })
-      }, 1500)
+      }, 1111)
     },
     touchEnd() {
       if (this.itemInfo.readonly) {
@@ -235,8 +243,8 @@ export default {
             const list = val.split('/')
             return list[list.length - 1]
           }
-          formData[itemInfo.value] = [...picPath]
-          formData[itemInfo.imgName] = [...picPath].map(_ => format(_))
+          formData[itemInfo.value] = Array.isArray(formData[itemInfo.value]) ? [...formData[itemInfo.value], ...picPath] : [...picPath]
+          formData[itemInfo.imgName] = Array.isArray(formData[itemInfo.imgName]) ? [...formData[itemInfo.imgName], ...[...picPath].map(_ => format(_))] : [...picPath].map(_ => format(_))
         }
         console.log('成功：' + JSON.stringify(result))
       }).catch((error) => {

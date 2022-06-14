@@ -97,36 +97,42 @@ export default {
   mounted() {
     console.log('环境变量：', process.env.NODE_ENV)
     this.initData()
-    // 生产
-    if (!window.location.href.includes('ticket')) { // 第一次进入
-      removeToken()
-      window.location.href = 'https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&servicecode=BCDSGA_0a7098c805e2b9ad941388ee2ca5eba2&redirectUrl=https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2002207375/lastTest/index.html?debug=true'
-    }
-    if (!getToken() && window.location.href.includes('ticket')) { // 如果token 为空 调用接口
-      this.init()
-    }
     // 开发
-    // if (!getToken()) {
-    //   removeToken()
-    //   this.init()
-    // }
+    if (process.env.NODE_ENV === 'development') {
+      if (!getToken()) {
+        removeToken()
+        this.init()
+      }
+    } else {
+      if (!window.location.href.includes('ticket')) { // 第一次进入
+        removeToken()
+        window.location.href = 'https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&servicecode=BCDSGA_0a7098c805e2b9ad941388ee2ca5eba2&redirectUrl=https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2002207375/lastTest/index.html?debug=true'
+      }
+      if (!getToken() && window.location.href.includes('ticket')) { // 如果token 为空 调用接口
+        this.init()
+      }
+    }
   },
   methods: {
     async init() {
-      // 生产
-      const ticket = this.getQuery('ticket')
-      if (!ticket) {
-        console.log('获取票据失败')
-        return
+      let ticket = null
+      if (process.env.NODE_ENV === 'development') {
+        ticket = '8a1189b881444814018160cbb4612397-ticket'
+      } else {
+        ticket = this.getQuery('ticket')
+        if (!ticket) {
+          console.log('获取票据失败')
+          return
+        }
       }
-      // 开发
-      // const ticket = '8a1189b881444814018160cbb4612397-ticket'
       const result = await Api.postMobile({ ticket })
       if (result.code === '200') {
-        this.$EventBus.$emit('eventName')
         setToken(TOKEN, result.data)
+        this.$EventBus.$emit('eventName')
       } else {
-        window.location.href = 'https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&servicecode=BCDSGA_0a7098c805e2b9ad941388ee2ca5eba2&redirectUrl=https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2002207375/lastTest/index.html?debug=true'
+        if (process.env.NODE_ENV !== 'development') {
+          window.location.href = 'https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&servicecode=BCDSGA_0a7098c805e2b9ad941388ee2ca5eba2&redirectUrl=https://mapi.zjzwfw.gov.cn/web/mgop/gov-open/zj/2002207375/lastTest/index.html?debug=true'
+        }
       }
     },
     initData() {
