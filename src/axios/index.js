@@ -1,8 +1,9 @@
 'use strict'
 import axios from 'axios'
 import config from './config'
+import router from '@/router'
 import { Toast } from 'vant';
-import { getToken } from '@/utils/token'
+import { getToken, removeToken } from '@/utils/token'
 
 
 // 加密开关
@@ -12,6 +13,8 @@ const handleError = (res) => {
   const { status } = res
   if (status === 401) {
     Toast.fail('token已过期')
+    removeToken()
+    router.replace({ name: 'index' })
   }
 }
 

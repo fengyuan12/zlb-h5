@@ -67,9 +67,8 @@
         </div>
         <div class="question_upload_box">
           <div v-if="formData[itemInfo.value] && formData[itemInfo.value].length > 0">
-            <img v-for="(item, index) of formData[itemInfo.value]" :key="index" class="question_upload_box_img" :src="item" />
+            <img v-for="(item, index) of formData[itemInfo.value]" :key="index" class="question_upload_box_img" :src="item" @click="handleView(index, formData[itemInfo.value])" />
           </div>
-          <!-- <img v-if="!itemInfo.readonly" @click="handleUpload" class="question_upload_box_img" src="@/assets/img/question/upload.png" /> -->
           <div v-if="!itemInfo.readonly" @click="handleUpload" class="question_upload_box_custom" flex="main:center">
             <div class="custom_content" flex="main:center">
               <div class="content_plus"></div>
@@ -129,6 +128,7 @@
 
 <script>
 import moment from 'dayjs'
+import { ImagePreview } from 'vant'
 import { UiStyle } from '@/mixins/uistyle'
 import { getToken } from '@/utils/token'
 export default {
@@ -189,6 +189,12 @@ export default {
         return
       }
       this.showPicker = true
+    },
+    handleView(startPosition, images) {
+      ImagePreview({
+        images,
+        startPosition
+      })
     },
     handleUpload() {
       const { formData, itemInfo } = this
