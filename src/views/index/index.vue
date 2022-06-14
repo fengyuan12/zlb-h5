@@ -117,7 +117,7 @@ export default {
     async init() {
       let ticket = null
       if (process.env.NODE_ENV === 'development') {
-        ticket = '8a1189b881444814018160cbb4612397-ticket'
+        ticket = '8a118937814448130181612221dd1815-ticket'
       } else {
         ticket = this.getQuery('ticket')
         if (!ticket) {

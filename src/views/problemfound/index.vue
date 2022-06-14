@@ -93,11 +93,19 @@ export default {
     },
     async handleSumbit() {
       const { formData, unitList } = this
+      if (formData.rectifyIndex > -1) {
+        const data = unitList[formData.rectifyIndex]
+        if (data) {
+          formData.rectifyUnitId = data.id
+          formData.rectifyUnitName = data.unitName
+        }
+      }
+      formData.createUnitId = getToken() ? getToken().id : ''
       if (!formData.clueName) {
         this.$Toast.fail('问题名称不能为空')
         return
       }
-      if (!formData.questionType) {
+      if (!formData.questionType && formData.questionType !== 0) {
         this.$Toast.fail('问题类型不能为空')
         return
       }
@@ -121,14 +129,7 @@ export default {
         this.$Toast.fail('问题单位不能为空')
         return
       }
-      if (formData.rectifyIndex > -1) {
-        const data = unitList[formData.rectifyIndex]
-        if (data) {
-          formData.rectifyUnitId = data.id
-          formData.rectifyUnitName = data.unitName
-        }
-      }
-      formData.createUnitId = getToken() ? getToken().id : ''
+      console.log(formData, '表单提交数据')
       const result = await Api.postCule(formData)
       if (result.code === '200') {
         this.$Toast.success('保存成功')
