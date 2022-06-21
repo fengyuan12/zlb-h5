@@ -609,7 +609,7 @@ export default {
     async handleSumbit() {
       const saveData = {
         ...this.formData,
-        id: this.queryVal.id
+        id: this.queryVal.relevanceId || this.queryVal.id
       }
       if (!saveData.correctiveMeasures) {
         this.$Toast.fail('整改措施不能为空')
@@ -641,7 +641,8 @@ export default {
       const result = await infoApi.getDetail(params)
       if (result.code === '200') {
         this.formData = {
-          ...result.data
+          ...result.data,
+          ...this.proBelmRecttifiDetailInfo
         }
       } else {
         this.formData = {}

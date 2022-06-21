@@ -67,7 +67,7 @@
         </div>
         <div class="question_upload_box">
           <div v-if="formData[itemInfo.value] && formData[itemInfo.value].length > 0">
-            <img v-for="(item, index) of formData[itemInfo.value]" :key="index" class="question_upload_box_img" :src="item" @click="handleView(index, formData[itemInfo.value])" @touchstart="touchStart" @touchend="touchEnd" />
+            <img v-for="(item, index) of formData[itemInfo.value]" :key="index" class="question_upload_box_img" :src="item" @click="handleView(index, formData[itemInfo.value])" @touchstart="touchStart(index)" @touchend="touchEnd" />
           </div>
           <div v-if="!itemInfo.readonly" @click="handleUpload" class="question_upload_box_custom" flex="main:center">
             <div class="custom_content" flex="main:center">
